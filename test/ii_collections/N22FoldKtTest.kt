@@ -17,6 +17,6 @@ class N22FoldKtTest {
                         order(youTrack)
                 )
         )
-        assertEquals(setOf(idea), testShop.getSetOfProductsOrderedByEachCustomer())
+        assertEquals(setOf(idea), testShop.getIntersectionOfProductsOrderedByAllCustomers())
     }
 }
