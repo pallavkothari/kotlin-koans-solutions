@@ -2,6 +2,7 @@ package vi_generics
 
 import util.TODO
 import java.util.*
+import kotlin.collections.ArrayList
 
 fun task41(): Nothing = TODO(
     """
@@ -20,11 +21,29 @@ fun task41(): Nothing = TODO(
 )
 
 fun List<String>.partitionWordsAndLines(): Pair<List<String>, List<String>> {
-    task41()
-//    return partitionTo(ArrayList<String>(), ArrayList()) { s -> !s.contains(" ") }
+    return partitionTo(ArrayList<String>(), ArrayList()) { s -> !s.contains(" ") }
+}
+
+// the non-generic way:
+//fun List<String>.partitionTo(list1: MutableList<String>, list2: MutableList<String>, predicate: (String) -> Boolean): Pair<List<String>, List<String>> {
+//    val (l1, l2) = this.partition(predicate)
+//    l1.toCollection(list1)
+//    l2.toCollection(list2)
+//    return Pair(list1, list2)
+//}
+
+// the generic way:
+fun <T, C : MutableCollection<T>> Iterable<T>.partitionTo(first: C, second: C, predicate: (T)->Boolean): Pair<C, C> {
+    for (item in this) {
+        if (predicate(item)) {
+            first.add(item)
+        } else {
+            second.add(item)
+        }
+    }
+    return Pair(first, second)
 }
 
 fun Set<Char>.partitionLettersAndOtherSymbols(): Pair<Set<Char>, Set<Char>> {
-    task41()
-//    return partitionTo(HashSet<Char>(), HashSet()) { c -> c in 'a'..'z' || c in 'A'..'Z'}
+    return partitionTo(HashSet<Char>(), HashSet()) { c -> c in 'a'..'z' || c in 'A'..'Z'}
 }

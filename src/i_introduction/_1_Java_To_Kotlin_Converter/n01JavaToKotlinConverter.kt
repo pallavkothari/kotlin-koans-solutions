@@ -14,7 +14,5 @@ fun todoTask1(collection: Collection<Int>): Nothing = TODO(
 
 
 fun task1(collection: Collection<Int>): String {
-//    todoTask1(collection)
-    val javaCode1 = JavaCode1()
-    return javaCode1.task1(collection)
+    return KtCode().task1(collection)
 }
